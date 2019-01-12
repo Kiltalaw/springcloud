@@ -1,0 +1,46 @@
+server:
+  port: 8200
+spring:
+  application:
+    name: zuul-client
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:Password@localhost:8100/eureka
+    fetch-registry: false
+    register-with-eureka: false
+
+zuul:
+  routes:
+    route1:
+      path: /temp/**
+      service-id: hello-service
+    route2:
+      path: /hello/**
+      service-id: hello-service3
+
+ribbon:
+  eureka:
+    enabled: false
+hello-service:
+  ribbon:
+    listOfServers: http://localhost:8101,http://localhost:8102
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+hello-service3:
+  ribbon:
+    listOfServers: http://localhost:8103
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+
+feign:
+  hystrix:
+    enabled: true
