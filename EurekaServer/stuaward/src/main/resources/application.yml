@@ -1,0 +1,24 @@
+server:
+  port: 8100
+
+spring:
+  application:
+    name: award-register-server
+  security:
+    user:
+      name: user
+      password: Password
+
+#logging:
+#  level: info
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
+
