@@ -1,0 +1,15 @@
+server:
+  port: 8103
+
+spring:
+  application:
+    name: hello-service3
+
+eureka:
+  client:
+    service-url:
+     defaultZone: http://user:Password@localhost:8100/eureka
+
+feign:
+  hystrix:
+    enabled: true
